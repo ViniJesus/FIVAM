@@ -9,7 +9,7 @@ import { Page_Title } from "./hooks/Page_Title.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/",
     element: <App />,
   },
 ]);
