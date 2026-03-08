@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PostCard, PostTopbar } from "../../components/post";
-import { api } from "../../lib/api";
+import { api } from "../../services";
 import styles from "./Post.module.css";
 
 interface Post {
