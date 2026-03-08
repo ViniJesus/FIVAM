@@ -7,10 +7,16 @@ import { ToastProvider } from "./context/ToastContext.tsx";
 // import { SidebarProvider } from "./context/SidebarContext.tsx";
 import { Page_Title } from "./hooks/Page_Title.tsx";
 
+import EditPost from "./pages/EditPost.tsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/edit-post/:id",
+    element: <EditPost />,
   },
 ]);
 
