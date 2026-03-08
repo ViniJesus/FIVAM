@@ -1,0 +1,33 @@
+.has-ambiente-banner {
+  padding-top: 36px;
+}
+
+.ambiente-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ambiente-banner--production {
+  background-color: #b91c1c;
+}
+
+.ambiente-banner--homologation {
+  background-color: #c2410c;
+}
+
+.ambiente-banner--development {
+  background-color: #1d4ed8;
+}

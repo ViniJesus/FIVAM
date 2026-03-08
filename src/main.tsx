@@ -6,11 +6,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastProvider } from "./context/ToastContext.tsx";
 // import { SidebarProvider } from "./context/SidebarContext.tsx";
 import { Page_Title } from "./hooks/Page_Title.tsx";
+import { PostScreen } from "./screens/Post";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/posts/:id",
+    element: <PostScreen />,
   },
 ]);
 
@@ -18,7 +23,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ToastProvider>
       {/* <SidebarProvider> */}
-      {/* <Page_Title router={router} /> */}
+      <Page_Title router={router} />
       <RouterProvider router={router} />
       {/* </SidebarProvider> */}
     </ToastProvider>

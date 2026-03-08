@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Ambiente } from "../components/ui/Ambiente";
 
 interface RouterState {
   location: {
@@ -22,7 +23,7 @@ export function Page_Title({ router }: PageTitleProps) {
       const path =
         rawPath.endsWith("/") && rawPath !== "/"
           ? rawPath.slice(0, -1)
-          : rawPath; // remove trailing slash
+          : rawPath;
       const pathLower = path.toLowerCase();
 
       const titles: Record<string, string> = {
@@ -30,7 +31,7 @@ export function Page_Title({ router }: PageTitleProps) {
         "/motor_busca": "Motor de Busca",
         "/dashboard": "Dashboard",
         "/resultados": "Resultados",
-        "/usuario": "Usuário",
+        "/usuario": "Usuario",
         "/chatbot": "ChatBot",
         "/importa_excel": "Importar Excel",
         "/planos_assinatura": "Planos de Assinatura",
@@ -39,15 +40,16 @@ export function Page_Title({ router }: PageTitleProps) {
       };
 
       if (pathLower.startsWith("/dashboard/data")) {
-        document.title = "Gráfico de Dados";
+        document.title = "Grafico de Dados";
+      } else if (pathLower.startsWith("/posts/")) {
+        document.title = "Post";
       } else if (pathLower.startsWith("/analise_setor")) {
-        document.title = "Análise por Setor";
+        document.title = "Analise por Setor";
       } else if (pathLower.startsWith("/grafico")) {
-        document.title = "Gráfico";
+        document.title = "Grafico";
       } else if (titles[pathLower]) {
         document.title = titles[pathLower];
       } else {
-        // Fallback: derive from last segment by replacing underscores with spaces and capitalizing
         const segments = pathLower.split("/");
         const last = segments.pop() || "";
         if (last) {
@@ -69,5 +71,5 @@ export function Page_Title({ router }: PageTitleProps) {
     return unsubscribe;
   }, [router]);
 
-  return null;
+  return <Ambiente />;
 }
