@@ -6,14 +6,20 @@
   --color-primary: #2563eb;
   --color-accent: #38bdf8;
   --color-dark: #0f172a;
+  --color-hover: #0b40b4;
 
   /* BACKGROUND */
   --color-background: #f1f5f9;
   --color-background-2: #ffffff;
+  --color-input: #dae2f9;
 
   /* TEXT */
   --color-text-primary: #030710;
   --color-text-secundary: #64748b;
 
   --font-poppins: "Poppins", sans-serif;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
 }

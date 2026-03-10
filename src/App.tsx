@@ -1,9 +1,7 @@
+import Menu_Login from "./pages/login/Menu_Login";
+
 function App() {
-  return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
-  );
+  return <Menu_Login />;
 }
 
 export default App;
