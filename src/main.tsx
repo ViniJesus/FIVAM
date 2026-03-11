@@ -1,26 +1,43 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ToastProvider } from "./context/ToastContext.tsx";
-// import { SidebarProvider } from "./context/SidebarContext.tsx";
-import { Page_Title } from "./hooks/Page_Title.tsx";
+
+import PostsList from "./pages/PostsList";
+import Login from "./pages/Login";
+import PostDetail from "./pages/PostDetail";
+
+import PrivateRoute from "./routes/PrivateRoute";
+import { ToastProvider } from "./context/ToastContext";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
+    path: "/login",
+    element: <Login />
   },
+  {
+    path: "/",
+    element: (
+      <PrivateRoute>
+        <PostsList />
+      </PrivateRoute>
+    )
+  },
+  {
+    path: "/posts/:id",
+    element: (
+      <PrivateRoute>
+        <PostDetail />
+      </PrivateRoute>
+    )
+  }
 ]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ToastProvider>
-      {/* <SidebarProvider> */}
-      {/* <Page_Title router={router} /> */}
       <RouterProvider router={router} />
-      {/* </SidebarProvider> */}
     </ToastProvider>
-  </StrictMode>,
+  </StrictMode>
 );
