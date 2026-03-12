@@ -1,7 +1,7 @@
-import Menu_Login from "./pages/login/Menu_Login";
+import PostsList from "./pages/PostsList";
 
 function App() {
-  return <Menu_Login />;
+  return <PostsList />;
 }
 
 export default App;

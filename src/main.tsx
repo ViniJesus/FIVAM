@@ -1,35 +1,41 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
+
 import Register from "./pages/register/Register.tsx";
 import Posts from "./pages/posts/Posts.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import { Page_Title } from "./hooks/Page_Title.tsx";
 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import PostsList from "./pages/PostsList";
+import Login from "./pages/Login";
+import PostDetail from "./pages/PostDetail";
+
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Navigate to="login" />,
-  },
-  {
     path: "/login",
-    element: <App />,
+    element: <Login />,
   },
   {
     path: "/register",
     element: <Register />,
   },
   {
-    path: "/postagens",
+    path: "/",
     element: (
       <RequireAuth>
-        <Posts />
+        <PostsList />
+      </RequireAuth>
+    ),
+  },
+
+  {
+    path: "/posts/:id",
+    element: (
+      <RequireAuth>
+        <PostDetail />
       </RequireAuth>
     ),
   },
