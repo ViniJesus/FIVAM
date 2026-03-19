@@ -3,9 +3,10 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 import Register from "./pages/register/Register.tsx";
-import Posts from "./pages/posts/Posts.tsx";
+// import Posts from "./pages/posts/Posts.tsx";
 import RequireAuth from "./components/RequireAuth.tsx";
 import { Page_Title } from "./hooks/Page_Title.tsx";
+import CreatePost from "./pages/posts/CreatePost.tsx";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -30,7 +31,14 @@ const router = createBrowserRouter([
       </RequireAuth>
     ),
   },
-
+  {
+    path: "/posts/create",
+    element: (
+      <RequireAuth>
+        <CreatePost />
+      </RequireAuth>
+    ),
+  },
   {
     path: "/posts/:id",
     element: (
