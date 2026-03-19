@@ -27,7 +27,7 @@ const LoginForm = () => {
 
       localStorage.setItem("token", response.token);
 
-      navigate("/postagens");
+      navigate("/posts");
       setLoading(false);
     } catch (error) {
       console.error("Erro ao fazer login:", error);

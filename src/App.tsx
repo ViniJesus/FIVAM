@@ -1,4 +1,4 @@
-import PostsList from "./pages/PostsList";
+import PostsList from "./pages/posts/PostsList";
 
 function App() {
   return <PostsList />;

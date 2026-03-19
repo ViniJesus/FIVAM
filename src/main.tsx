@@ -1,46 +1,35 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
 import "./index.css";
 
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import Register from "./pages/register/Register.tsx";
-import Posts from "./pages/posts/Posts.tsx";
-import RequireAuth from "./components/RequireAuth.tsx";
+// import RequireAuth from "./components/RequireAuth.tsx";
 import { Page_Title } from "./hooks/Page_Title.tsx";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import PostsList from "./pages/PostsList";
-import Login from "./pages/Login";
-import PostDetail from "./pages/PostDetail";
+// import Login from "./pages/Login";
+import PostsList from "./pages/posts/PostsList.tsx";
+import PostDetail from "./pages/posts/PostDetail.tsx";
+import Menu_Login from "./pages/login/Menu_Login.tsx";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <PostsList />,
+  },
+  {
     path: "/login",
-    element: <Login />,
+    element: <Menu_Login />,
   },
   {
     path: "/register",
     element: <Register />,
   },
   {
-    path: "/",
-    element: (
-      <RequireAuth>
-        <PostsList />
-      </RequireAuth>
-    ),
-  },
-
-  {
     path: "/posts/:id",
-    element: (
-      <RequireAuth>
-        <PostDetail />
-      </RequireAuth>
-    ),
+    element: <PostDetail />,
   },
 ]);
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Page_Title router={router} />

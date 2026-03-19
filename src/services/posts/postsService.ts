@@ -1,4 +1,4 @@
-import { api } from "./baseApi";
+import { api } from "../baseApi";
 
 export interface Author {
   id: number;
@@ -7,10 +7,10 @@ export interface Author {
 }
 
 export interface Post {
-  id: number;
+  _id: number;
   title: string;
   content: string;
-  author: Author;
+  author: string;
 }
 
 export const postsService = {

@@ -1,19 +1,13 @@
-import Navbar from "../components/ui/Navbar";
+import Navbar from "../../components/ui/Navbar";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { api } from "../services/baseApi";
-
-type Author = {
-  id: string;
-  name: string;
-  email: string;
-};
+import { api } from "../../services/baseApi";
 
 type Post = {
-  id: string;
-  title: string;
-  content: string;
-  author: Author;
+  _id: string;
+  titulo: string;
+  conteudo: string;
+  autor: string;
 };
 
 export default function PostDetail() {
@@ -48,16 +42,23 @@ export default function PostDetail() {
     <>
       <Navbar />
 
-      <div style={{ padding: "40px", fontFamily: "Arial", maxWidth: "800px", margin: "auto" }}>
-        <h1>{post.title}</h1>
+      <div
+        style={{
+          padding: "40px",
+          fontFamily: "Arial",
+          maxWidth: "800px",
+          margin: "auto",
+        }}
+      >
+        <h1>{post.titulo}</h1>
 
         <p>
-          <strong>Autor:</strong> {post.author.name}
+          <strong>Autor:</strong> {post.autor}
         </p>
 
         <hr style={{ margin: "20px 0" }} />
 
-        <p style={{ lineHeight: "1.6", fontSize: "18px" }}>{post.content}</p>
+        <p style={{ lineHeight: "1.6", fontSize: "18px" }}>{post.conteudo}</p>
       </div>
     </>
   );

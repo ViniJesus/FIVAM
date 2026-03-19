@@ -3,86 +3,30 @@ import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const navigate = useNavigate();
 
-  function handleLogout() {
-    localStorage.removeItem("token");
-    navigate("/login");
-  }
-
   return (
-    <nav
-      style={{
-        background: "#2f63d8",
-        padding: "14px 40px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        color: "white",
-        fontFamily: "Arial"
-      }}
-    >
+    <nav className="flex items-center justify-between border-b border-gray-200 bg-white/80 px-10 py-4 shadow-sm backdrop-blur-md">
       {/* LOGO */}
-
-      <h2
-        style={{
-          margin: 0,
-          fontSize: "18px",
-          fontWeight: "bold",
-          letterSpacing: "0.5px"
-        }}
+      <h1
+        onClick={() => navigate("/")}
+        className="from-primary cursor-pointer bg-linear-to-r to-indigo-600 bg-clip-text text-3xl font-extrabold text-transparent"
       >
-        FIVAM Blog
-      </h2>
+        FIVAM
+      </h1>
 
       {/* BOTÕES */}
-
-      <div
-        style={{
-          display: "flex",
-          gap: "12px"
-        }}
-      >
+      <div className="flex items-center gap-2">
         <button
-          onClick={() => navigate("/")}
-          style={{
-            padding: "8px 16px",
-            borderRadius: "20px",
-            border: "none",
-            background: "white",
-            color: "#2f63d8",
-            fontWeight: "bold",
-            cursor: "pointer",
-            transition: "0.2s"
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.opacity = "0.8")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.opacity = "1")
-          }
+          onClick={() => navigate("/register")}
+          className="rounded-md px-5 py-2 text-base font-medium text-gray-700 transition-all duration-200 hover:bg-gray-100"
         >
-          📄 Posts
+          Cadastro
         </button>
 
         <button
-          onClick={handleLogout}
-          style={{
-            padding: "8px 16px",
-            borderRadius: "20px",
-            border: "none",
-            background: "#ff4d4f",
-            color: "white",
-            fontWeight: "bold",
-            cursor: "pointer",
-            transition: "0.2s"
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.opacity = "0.8")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.opacity = "1")
-          }
+          onClick={() => navigate("/login")}
+          className="from-primary to-accent rounded-md bg-linear-to-r px-6 py-2.5 text-base text-white shadow-md transition-all duration-200 hover:opacity-90 hover:shadow-lg"
         >
-          🚪 Logout
+          Login
         </button>
       </div>
     </nav>
