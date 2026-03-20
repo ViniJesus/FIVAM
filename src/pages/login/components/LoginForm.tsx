@@ -26,6 +26,8 @@ const LoginForm = () => {
       }
 
       localStorage.setItem("token", response.token);
+      localStorage.setItem("nome", response.user.nome);
+      localStorage.setItem("username", response.user.email);
 
       navigate("/posts");
       setLoading(false);

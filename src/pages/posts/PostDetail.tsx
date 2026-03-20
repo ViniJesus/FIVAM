@@ -8,6 +8,7 @@ type Post = {
   titulo: string;
   conteudo: string;
   autor: string;
+  dataCriacao: string;
 };
 
 export default function PostDetail() {
@@ -30,36 +31,64 @@ export default function PostDetail() {
     }
   }
 
+  function formatDate(dateString: string) {
+    return new Date(dateString).toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+  }
+
   if (loading) {
-    return <p>Carregando post...</p>;
+    return (
+      <div>
+        <Navbar />
+        <div className="flex justify-center py-20">
+          <p className="text-text-secundary">Carregando post...</p>
+        </div>
+      </div>
+    );
   }
 
   if (!post) {
-    return <p>Post não encontrado.</p>;
+    return (
+      <div>
+        <Navbar />
+        <div className="flex justify-center py-20">
+          <p className="text-text-secundary">Post não encontrado.</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <>
+    <div>
       <Navbar />
 
-      <div
-        style={{
-          padding: "40px",
-          fontFamily: "Arial",
-          maxWidth: "800px",
-          margin: "auto",
-        }}
-      >
-        <h1>{post.titulo}</h1>
+      <div className="mx-auto max-w-[1200px] px-6 py-12">
+        {/* CARD */}
+        <div className="bg-background-2 rounded-2xl border border-gray-200 p-8 shadow-sm">
+          {/* TÍTULO */}
+          <h1 className="text-text-primary text-3xl leading-tight font-bold">
+            {post.titulo}
+          </h1>
 
-        <p>
-          <strong>Autor:</strong> {post.autor}
-        </p>
+          {/* AUTOR + DATA */}
+          <p className="text-text-secundary mt-3 text-sm">
+            Por:{" "}
+            <span className="text-text-primary font-medium">{post.autor}</span>{" "}
+            • {formatDate(post.dataCriacao)}
+          </p>
 
-        <hr style={{ margin: "20px 0" }} />
+          {/* DIVIDER */}
+          <div className="my-6 h-px w-full bg-gray-200" />
 
-        <p style={{ lineHeight: "1.6", fontSize: "18px" }}>{post.conteudo}</p>
+          {/* CONTEÚDO */}
+          <p className="text-text-secundary text-base leading-relaxed whitespace-pre-line">
+            {post.conteudo}
+          </p>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

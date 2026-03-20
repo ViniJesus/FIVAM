@@ -15,7 +15,6 @@ export async function login(email: string, senha: string) {
       email: email,
       senha: senha,
     });
-    console.log(response.token);
     return response;
   } catch (error) {
     console.error(error);
