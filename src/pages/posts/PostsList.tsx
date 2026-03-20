@@ -21,6 +21,7 @@ type Post = {
 export default function PostsList() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -28,6 +29,15 @@ export default function PostsList() {
   useEffect(() => {
     fetchPosts();
   }, []);
+
+  // 🔥 debounce (espera usuário parar de digitar)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [search]);
 
   async function fetchPosts() {
     try {
@@ -47,18 +57,25 @@ export default function PostsList() {
       year: "numeric",
     });
   }
+
+  // 🔥 normaliza texto (remove acento + lowercase)
+  function normalize(text: string) {
+    return text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  // 🔥 filtro inteligente
   const filteredPosts = posts.filter((post) => {
-    const searchTerm = search.toLowerCase();
+    const searchTerm = normalize(debouncedSearch);
 
     return (
-      post.titulo?.toLowerCase().includes(searchTerm) ||
-      post.conteudo?.toLowerCase().includes(searchTerm) ||
-      post.autor?.nome.toLowerCase().includes(searchTerm) ||
-      post.dataCriacao?.toLowerCase().includes(searchTerm)
+      normalize(post.titulo).includes(searchTerm) ||
+      normalize(post.conteudo).includes(searchTerm) ||
+      normalize(post.autor?.nome || "").includes(searchTerm)
     );
   });
-
-  console.log(filteredPosts);
 
   return (
     <div>
@@ -79,10 +96,8 @@ export default function PostsList() {
 
             {/* INPUT DE BUSCA */}
             <div className="relative mb-8 w-1/2">
-              {/* Ícone */}
               <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-gray-400" />
 
-              {/* Input */}
               <input
                 type="text"
                 placeholder="Buscar por título, conteúdo ou autor..."
@@ -115,6 +130,7 @@ export default function PostsList() {
               </p>
             </div>
           )}
+
           {/* LISTA */}
           <div className="grid grid-cols-3 items-stretch gap-6">
             {!loading &&
@@ -128,7 +144,7 @@ export default function PostsList() {
                     {post.titulo}
                   </h2>
 
-                  {/* AUTOR + DATA (simulado) */}
+                  {/* AUTOR + DATA */}
                   <p className="text-text-secundary text-sm">
                     Por:{" "}
                     <span className="text-text-primary font-medium">
