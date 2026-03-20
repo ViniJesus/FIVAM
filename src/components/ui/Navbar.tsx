@@ -18,7 +18,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate("/register")}
-            className="rounded-md px-5 py-2 text-base font-medium text-gray-700 transition-all duration-200 hover:bg-gray-100"
+            className="rounded-md px-5 py-2.5 text-base font-medium text-gray-700 transition-all duration-200 hover:bg-gray-100"
           >
             Cadastro
           </button>

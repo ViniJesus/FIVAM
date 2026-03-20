@@ -15,11 +15,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PostsList from "./pages/posts/PostsList.tsx";
 import PostDetail from "./pages/posts/PostDetail.tsx";
 import Menu_Login from "./pages/login/Menu_Login.tsx";
+import Dashboard from "./pages/dashboard/Dashboard.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <PostsList />,
+  },
+  {
+    path: "/posts/:id",
+    element: <PostDetail />,
   },
   {
     path: "/login",
@@ -30,16 +35,20 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
+    path: "/dashboard",
+    element: (
+      <RequireAuth>
+        <Dashboard />
+      </RequireAuth>
+    ),
+  },
+  {
     path: "/posts/create",
     element: (
       <RequireAuth>
         <CreatePost />
       </RequireAuth>
     ),
-  },
-  {
-    path: "/posts/:id",
-    element: <PostDetail />,
   },
 ]);
 createRoot(document.getElementById("root")!).render(

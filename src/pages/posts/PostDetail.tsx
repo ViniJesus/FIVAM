@@ -1,18 +1,27 @@
 import Navbar from "../../components/ui/Navbar";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../../services/baseApi";
+import { ArrowLeft } from "lucide-react";
+
+type Autor = {
+  _id: string;
+  nome: string;
+  email: string;
+};
 
 type Post = {
   _id: string;
   titulo: string;
   conteudo: string;
-  autor: string;
+  autor: Autor;
   dataCriacao: string;
 };
 
 export default function PostDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -62,12 +71,23 @@ export default function PostDetail() {
   }
 
   return (
-    <div>
+    <div className="bg-background min-h-screen">
       <Navbar />
 
       <div className="mx-auto max-w-[1200px] px-6 py-12">
+        {/* BOTÃO VOLTAR */}
+        <div className="mb-6">
+          <button
+            onClick={() => navigate(-1)}
+            className="hover:bg-hover bg-primary flex items-center gap-2 rounded-md px-3 py-2.5 text-white transition-all"
+          >
+            <ArrowLeft size={18} />
+            Voltar
+          </button>
+        </div>
+
         {/* CARD */}
-        <div className="bg-background-2 rounded-2xl border border-gray-200 p-8 shadow-sm">
+        <div className="bg-background-2 rounded-md border border-gray-200 p-8 shadow-sm">
           {/* TÍTULO */}
           <h1 className="text-text-primary text-3xl leading-tight font-bold">
             {post.titulo}
@@ -76,7 +96,9 @@ export default function PostDetail() {
           {/* AUTOR + DATA */}
           <p className="text-text-secundary mt-3 text-sm">
             Por:{" "}
-            <span className="text-text-primary font-medium">{post.autor}</span>{" "}
+            <span className="text-text-primary font-medium">
+              {post.autor.nome}
+            </span>{" "}
             • {formatDate(post.dataCriacao)}
           </p>
 

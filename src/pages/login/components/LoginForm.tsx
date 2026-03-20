@@ -28,8 +28,9 @@ const LoginForm = () => {
       localStorage.setItem("token", response.token);
       localStorage.setItem("nome", response.user.nome);
       localStorage.setItem("username", response.user.email);
+      localStorage.setItem("userId", response.user._id);
 
-      navigate("/posts");
+      navigate("/dashboard");
       setLoading(false);
     } catch (error) {
       console.error("Erro ao fazer login:", error);

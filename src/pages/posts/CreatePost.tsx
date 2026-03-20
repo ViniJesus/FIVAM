@@ -1,125 +1,120 @@
-import { ArrowLeft, Send } from "lucide-react"; // Changed Save to Send icon
+import { ArrowLeft, Send } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { CreatePost } from "@/services/posts/postCreate";
+import NavbarLogin from "@/components/ui/NavBarLogin";
 
-export default function CreatePost() {
+export default function CreatePostPage() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     titulo: "",
     conteudo: "",
-    autor: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
+  const user = localStorage.getItem("nome");
+
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Simular o comportamento de criar uma nova postagem
-    console.log("Creating new post:", formData);
-    // Aqui você integraria a chamada à sua API para salvar a nova postagem
-    navigate("/"); // Redireciona após a criação
+  const handleSubmit = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+
+    try {
+      setLoading(true);
+      await CreatePost(formData.titulo, formData.conteudo);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Erro ao criar post", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="bg-background font-poppins selection:bg-accent/30 flex min-h-screen flex-col">
-      {/* Header */}
-      <header className="bg-background-2 border-dark/5 sticky top-0 z-50 w-full border-b shadow-sm">
-        <div className="mx-auto flex h-20 max-w-4xl items-center justify-between px-6">
-          <div className="flex items-center gap-4">
-            <Link
-              to="/"
-              className="hover:bg-background text-text-secundary hover:text-text-primary rounded-full p-2 transition-colors"
-            >
-              <ArrowLeft className="h-5 w-5" />
-            </Link>
-            <h1 className="text-text-primary text-xl font-bold tracking-tight">
-              Criar Nova Postagem
-            </h1>
-          </div>
+    <div className="bg-background min-h-screen">
+      <NavbarLogin user={user} />
 
-          <button
-            onClick={handleSubmit}
-            className="bg-primary hover:bg-primary/90 shadow-primary/20 hover:shadow-primary/30 flex items-center gap-2 rounded-full px-6 py-2.5 font-medium text-white shadow-sm transition-all hover:shadow-md"
+      <main className="mx-auto max-w-3xl px-6 py-10">
+        {/* TOPO */}
+        <div className="mb-8 flex items-center gap-4">
+          <Link
+            to="/"
+            className="text-text-secundary hover:text-text-primary transition"
           >
-            <Send className="h-4 w-4" /> {/* Changed icon to Send */}
-            <span>Criar Postagem</span> {/* Changed button text */}
-          </button>
+            <ArrowLeft />
+          </Link>
+
+          <div>
+            <h1 className="text-text-primary text-2xl font-semibold">
+              Criar nova publicação
+            </h1>
+            <p className="text-text-secundary text-sm">
+              Compartilhe conhecimento com seus alunos
+            </p>
+          </div>
         </div>
-      </header>
 
-      {/* Main Content */}
-      <main className="mx-auto w-full max-w-4xl flex-1 px-6 py-12">
-        <form onSubmit={handleSubmit} className="space-y-8 tracking-wide">
-          {/* Main info card */}
-          <div className="bg-background-2 border-dark/5 shadow-dark/5 rounded-3xl border p-8 shadow-sm">
-            <div className="space-y-6">
-              {/* Título */}
-              <div>
-                <label
-                  htmlFor="titulo"
-                  className="text-text-primary mb-2 block text-sm font-semibold"
-                >
-                  Título
-                </label>
-                <input
-                  type="text"
-                  id="titulo"
-                  name="titulo"
-                  value={formData.titulo}
-                  onChange={handleChange}
-                  className="bg-background border-dark/10 text-text-primary placeholder:text-text-secundary focus:ring-primary/20 focus:border-primary w-full rounded-2xl border px-5 py-3.5 text-lg font-medium transition-all focus:ring-2 focus:outline-none"
-                  placeholder="Insira o título da postagem..."
-                  required
-                />
-              </div>
-
-              {/* Autor */}
-              <div>
-                <label
-                  htmlFor="autor"
-                  className="text-text-primary mb-2 block text-sm font-semibold"
-                >
-                  Autor(a)
-                </label>
-                <input
-                  type="text"
-                  id="autor"
-                  name="autor"
-                  value={formData.autor}
-                  onChange={handleChange}
-                  className="bg-background border-dark/10 text-text-primary placeholder:text-text-secundary focus:ring-primary/20 focus:border-primary w-full rounded-2xl border px-5 py-3.5 transition-all focus:ring-2 focus:outline-none"
-                  placeholder="Nome do autor(a)..."
-                  required
-                />
-              </div>
-            </div>
+        {/* CARD */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-background-2 space-y-6 rounded-md border border-gray-200 p-6 shadow-sm"
+        >
+          {/* TÍTULO */}
+          <div>
+            <label className="text-text-primary mb-2 block text-sm font-medium">
+              Título
+            </label>
+            <input
+              type="text"
+              name="titulo"
+              value={formData.titulo}
+              onChange={handleChange}
+              placeholder="Ex: Introdução ao React"
+              className="bg-background focus:ring-primary w-full rounded-md border border-gray-300 px-4 py-3 text-sm focus:ring-2 focus:outline-none"
+              required
+            />
           </div>
 
-          {/* Editor Card */}
-          <div className="bg-background-2 border-dark/5 shadow-dark/5 mt-8 flex min-h-[400px] flex-1 flex-col rounded-3xl border p-8 shadow-sm">
-            <label
-              htmlFor="conteudo"
-              className="text-text-primary mb-2 block text-sm font-semibold"
-            >
-              Conteúdo do Post
+          {/* CONTEÚDO */}
+          <div>
+            <label className="text-text-primary mb-2 block text-sm font-medium">
+              Conteúdo
             </label>
             <textarea
-              id="conteudo"
               name="conteudo"
               value={formData.conteudo}
               onChange={handleChange}
-              className="bg-background border-dark/10 text-text-primary placeholder:text-text-secundary focus:ring-primary/20 focus:border-primary min-h-[300px] w-full flex-1 resize-none rounded-2xl border p-5 font-mono text-sm leading-relaxed transition-all focus:ring-2 focus:outline-none"
-              placeholder="Comece a editar o conteúdo do seu post aqui..."
+              placeholder="Escreva o conteúdo do post..."
+              className="bg-background focus:ring-primary min-h-[250px] w-full rounded-md border border-gray-300 p-4 text-sm leading-relaxed focus:ring-2 focus:outline-none"
               required
             />
+          </div>
+
+          {/* FOOTER */}
+          <div className="flex items-center justify-end gap-3 border-t border-gray-100 pt-4">
+            <button
+              type="button"
+              onClick={() => navigate("/dashboard")}
+              className="rounded-md px-5 py-2.5 text-base font-medium text-gray-700 transition-all duration-200 hover:bg-gray-100"
+            >
+              Cancelar
+            </button>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="from-primary to-accent flex items-center gap-2 rounded-md bg-linear-to-r px-6 py-2.5 text-base text-white shadow-md transition-all duration-200 hover:opacity-90 hover:shadow-lg"
+            >
+              <Send size={16} />
+              {loading ? "Publicando..." : "Publicar"}
+            </button>
           </div>
         </form>
       </main>

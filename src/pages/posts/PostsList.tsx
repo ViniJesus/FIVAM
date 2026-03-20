@@ -4,11 +4,17 @@ import { api } from "../../services/baseApi";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, LoaderCircle, Search, SearchX } from "lucide-react";
 
+type Autor = {
+  _id: string;
+  nome: string;
+  email: string;
+};
+
 type Post = {
   _id: string;
   titulo: string;
   conteudo: string;
-  autor: string;
+  autor: Autor;
   dataCriacao: string;
 };
 
@@ -47,7 +53,7 @@ export default function PostsList() {
     return (
       post.titulo?.toLowerCase().includes(searchTerm) ||
       post.conteudo?.toLowerCase().includes(searchTerm) ||
-      post.autor?.toLowerCase().includes(searchTerm) ||
+      post.autor?.nome.toLowerCase().includes(searchTerm) ||
       post.dataCriacao?.toLowerCase().includes(searchTerm)
     );
   });
@@ -126,7 +132,7 @@ export default function PostsList() {
                   <p className="text-text-secundary text-sm">
                     Por:{" "}
                     <span className="text-text-primary font-medium">
-                      {post.autor}
+                      {post.autor.nome}
                     </span>{" "}
                     • {formatDate(post.dataCriacao)}
                   </p>
