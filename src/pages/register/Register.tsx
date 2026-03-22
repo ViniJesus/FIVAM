@@ -1,4 +1,3 @@
-import React from "react";
 import RegisterForm from "./components/RegisterForm";
 import { useNavigate } from "react-router-dom";
 

@@ -1,3 +1,4 @@
+# Etapa 1: build da aplicação
 FROM node:18-alpine AS build
 
 WORKDIR /app
@@ -8,9 +9,14 @@ RUN npm install
 COPY . .
 RUN npm run build
 
+# Etapa 2: servidor nginx
 FROM nginx:alpine
 
+# Copia o build do Vite
 COPY --from=build /app/dist /usr/share/nginx/html
+
+# 🔥 Adiciona configuração do nginx (IMPORTANTE)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
