@@ -37,33 +37,35 @@ export default function NavbarLogin({ user }: User) {
   const initial = user ? user.charAt(0).toUpperCase() : "U";
 
   return (
-    <nav className="bg-background-2 border-b border-gray-200 px-10 py-4 shadow-sm">
-      <div className="mx-auto flex max-w-[1200px] items-center justify-between">
+    <nav className="bg-background-2 border-b border-gray-200 px-4 py-4 shadow-sm sm:px-6 md:px-10">
+      <div className="mx-auto flex max-w-300 items-center justify-between">
         {/* LOGO */}
         <h1
           onClick={() => navigate("/")}
-          className="from-primary cursor-pointer bg-linear-to-r to-indigo-600 bg-clip-text text-3xl font-extrabold text-transparent"
+          className="from-primary cursor-pointer bg-linear-to-r to-indigo-600 bg-clip-text text-2xl font-extrabold text-transparent sm:text-3xl"
         >
           FIVAM
         </h1>
 
         {/* USER MENU */}
         <div className="relative" ref={dropdownRef}>
-          {/* BOTÃO */}
+          {/* BOTÃO USUÁRIO */}
           <button
             onClick={() => setOpen(!open)}
-            className="bg-primary hover:bg-hover flex h-10 w-10 items-center justify-center rounded-md font-semibold text-white transition-all"
+            className="bg-primary hover:bg-hover flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold text-white transition-all duration-200 hover:scale-105 sm:h-10 sm:w-10 sm:text-base"
           >
             {initial}
           </button>
 
           {/* DROPDOWN */}
           {open && (
-            <div className="bg-background-2 animate-in fade-in zoom-in-95 absolute right-0 mt-3 w-56 rounded-md border border-gray-200 p-4 shadow-md">
+            <div className="bg-background-2 animate-in fade-in zoom-in-95 absolute right-0 mt-3 w-64 rounded-xl border border-gray-200 p-4 shadow-lg">
               {/* USER INFO */}
               <div className="mb-3">
-                <p className="text-text-secundary text-sm">Logado como:</p>
-                <p className="text-text-primary truncate font-semibold">
+                <p className="text-text-secundary text-xs sm:text-sm">
+                  Logado como
+                </p>
+                <p className="text-text-primary truncate text-sm font-semibold sm:text-base">
                   {user}
                 </p>
               </div>

@@ -30,7 +30,6 @@ export default function PostsList() {
     fetchPosts();
   }, []);
 
-  // 🔥 debounce (espera usuário parar de digitar)
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search);
@@ -58,7 +57,6 @@ export default function PostsList() {
     });
   }
 
-  // 🔥 normaliza texto (remove acento + lowercase)
   function normalize(text: string) {
     return text
       .toLowerCase()
@@ -66,7 +64,6 @@ export default function PostsList() {
       .replace(/[\u0300-\u036f]/g, "");
   }
 
-  // 🔥 filtro inteligente
   const filteredPosts = posts.filter((post) => {
     const searchTerm = normalize(debouncedSearch);
 
@@ -81,12 +78,12 @@ export default function PostsList() {
     <div>
       <Navbar />
 
-      <div className="bg-background min-h-screen px-6 py-10">
+      <div className="bg-background min-h-screen px-4 py-6 sm:px-6 sm:py-10">
         <div className="mx-auto max-w-[1200px]">
           {/* HEADER */}
-          <div className="flex items-center justify-between">
-            <div className="mb-8">
-              <h1 className="text-text-primary text-3xl font-bold">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h1 className="text-text-primary text-2xl font-bold sm:text-3xl">
                 Postagens
               </h1>
               <p className="text-text-secundary mt-1 text-sm">
@@ -95,7 +92,7 @@ export default function PostsList() {
             </div>
 
             {/* INPUT DE BUSCA */}
-            <div className="relative mb-8 w-1/2">
+            <div className="relative w-full sm:w-[400px]">
               <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-gray-400" />
 
               <input
@@ -111,7 +108,7 @@ export default function PostsList() {
           {/* LOADING */}
           {loading && (
             <div className="flex w-full flex-col items-center justify-center py-16">
-              <div className="bg-background-2 flex items-center gap-3 rounded-full border border-gray-200 px-6 py-3 shadow-sm">
+              <div className="bg-background-2 flex items-center gap-3 rounded-full border border-gray-200 px-4 py-3 shadow-sm sm:px-6">
                 <LoaderCircle className="text-primary h-5 w-5 animate-spin" />
                 <span className="text-text-secundary text-sm font-medium">
                   Carregando posts...
@@ -122,7 +119,7 @@ export default function PostsList() {
 
           {/* EMPTY */}
           {!loading && filteredPosts.length === 0 && (
-            <div className="mt-16 flex flex-col items-center justify-center text-center">
+            <div className="mt-16 flex flex-col items-center justify-center px-4 text-center">
               <SearchX className="mb-3 h-8 w-8 text-gray-400" />
 
               <p className="text-text-secundary text-sm">
@@ -132,15 +129,15 @@ export default function PostsList() {
           )}
 
           {/* LISTA */}
-          <div className="grid grid-cols-3 items-stretch gap-6">
+          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {!loading &&
               filteredPosts.map((post) => (
                 <div
                   key={post._id}
-                  className="bg-background-2 flex h-full flex-col rounded-2xl border border-gray-200 p-6 shadow-sm transition-all duration-200 hover:shadow-md"
+                  className="bg-background-2 flex h-full flex-col rounded-2xl border border-gray-200 p-5 shadow-sm transition-all duration-200 hover:shadow-md sm:p-6"
                 >
                   {/* TÍTULO */}
-                  <h2 className="text-text-primary mb-2 text-xl font-semibold">
+                  <h2 className="text-text-primary mb-2 text-lg font-semibold sm:text-xl">
                     {post.titulo}
                   </h2>
 
