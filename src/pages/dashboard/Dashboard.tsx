@@ -1,10 +1,10 @@
-import NavbarLogin from "@/components/ui/NavBarLogin";
 import { postsService, type Post } from "@/services/posts/postsService";
 import { useEffect, useState } from "react";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ModalDelete from "../posts/modal/ModalDelete";
 import ModalEdit from "../posts/modal/ModalEdit";
+import Nav_Bar from "@/components/ui/Nav_Bar";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -14,7 +14,6 @@ const Dashboard = () => {
   const [editModal, setEditModal] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
 
-  const user = localStorage.getItem("nome");
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
@@ -36,7 +35,7 @@ const Dashboard = () => {
 
   return (
     <div className="bg-background min-h-screen">
-      <NavbarLogin user={user} />
+      <Nav_Bar />
 
       <div className="mx-auto max-w-4xl px-6 py-10">
         {/* HEADER */}

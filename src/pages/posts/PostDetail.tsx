@@ -1,8 +1,8 @@
-import Navbar from "../../components/ui/Navbar";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { api } from "../../services/baseApi";
 import { ArrowLeft } from "lucide-react";
+import Nav_Bar from "@/components/ui/Nav_Bar";
 
 type Autor = {
   _id: string;
@@ -51,7 +51,7 @@ export default function PostDetail() {
   if (loading) {
     return (
       <div>
-        <Navbar />
+        <Nav_Bar />
         <div className="flex justify-center py-20">
           <p className="text-text-secundary">Carregando post...</p>
         </div>
@@ -62,7 +62,7 @@ export default function PostDetail() {
   if (!post) {
     return (
       <div>
-        <Navbar />
+        <Nav_Bar />
         <div className="flex justify-center py-20">
           <p className="text-text-secundary">Post não encontrado.</p>
         </div>
@@ -72,7 +72,7 @@ export default function PostDetail() {
 
   return (
     <div className="bg-background min-h-screen">
-      <Navbar />
+      <Nav_Bar />
 
       <div className="mx-auto max-w-[1200px] px-6 py-12">
         {/* BOTÃO VOLTAR */}

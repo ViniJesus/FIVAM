@@ -2,7 +2,7 @@ import { ArrowLeft, Send } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CreatePost } from "@/services/posts/postCreate";
-import NavbarLogin from "@/components/ui/NavBarLogin";
+import Nav_Bar from "@/components/ui/Nav_Bar";
 
 export default function CreatePostPage() {
   const navigate = useNavigate();
@@ -13,8 +13,6 @@ export default function CreatePostPage() {
   });
 
   const [loading, setLoading] = useState(false);
-
-  const user = localStorage.getItem("nome");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -39,7 +37,7 @@ export default function CreatePostPage() {
 
   return (
     <div className="bg-background min-h-screen">
-      <NavbarLogin user={user} />
+      <Nav_Bar />
 
       <main className="mx-auto max-w-3xl px-6 py-10">
         {/* TOPO */}

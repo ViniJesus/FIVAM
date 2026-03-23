@@ -1,8 +1,8 @@
-import Navbar from "../../components/ui/Navbar";
 import { useEffect, useState } from "react";
 import { api } from "../../services/baseApi";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, LoaderCircle, Search, SearchX } from "lucide-react";
+import Nav_Bar from "@/components/ui/Nav_Bar";
 
 type Autor = {
   _id: string;
@@ -79,7 +79,7 @@ export default function PostsList() {
 
   return (
     <div>
-      <Navbar />
+      <Nav_Bar />
 
       <div className="bg-background min-h-screen px-6 py-10">
         <div className="mx-auto max-w-[1200px]">
