@@ -11,17 +11,19 @@ const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!nome || !email || !senha) {
-      alert("Preencha todas as informações");
+      setError("Preencha todas as informações");
       return;
     }
 
     try {
       setLoading(true);
+      setError("");
 
       const response = await register(nome, email, senha);
 
@@ -32,32 +34,44 @@ const RegisterForm = () => {
       navigate("/login");
     } catch (error) {
       console.error("Erro ao registrar:", error);
-      alert("Erro ao criar conta");
+      setError("Erro ao criar conta. Tente novamente.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleRegister} className="mt-4 flex flex-col gap-3">
-      <Input value={nome} setValue={setNome} type="text" label="Nome" />
+    <form onSubmit={handleRegister} className="mt-6 flex flex-col gap-4">
+      {/* INPUTS */}
+      <div className="flex flex-col gap-3">
+        <Input value={nome} setValue={setNome} type="text" label="Nome" />
 
-      <Input value={email} setValue={setEmail} type="email" label="Email" />
+        <Input value={email} setValue={setEmail} type="email" label="Email" />
 
-      <Input value={senha} setValue={setSenha} type="password" label="Senha" />
+        <Input
+          value={senha}
+          setValue={setSenha}
+          type="password"
+          label="Senha"
+        />
+      </div>
 
+      {/* ERRO */}
+      {error && <p className="text-center text-sm text-red-500">{error}</p>}
+
+      {/* BOTÃO */}
       <button
         type="submit"
         disabled={loading}
-        className="bg-primary disabled:bg-accent hover:bg-hover mt-10 w-full rounded-md px-4 py-2.5 text-white transition-all duration-300 disabled:opacity-70"
+        className="bg-primary hover:bg-hover disabled:bg-accent mt-2 flex w-full items-center justify-center gap-2 rounded-md px-4 py-3 text-sm font-medium text-white transition-all duration-300 disabled:opacity-70"
       >
         {loading ? (
-          <span className="flex items-center justify-center gap-2">
-            <LoaderCircle className="animate-spin" />
-            Criando Conta...
-          </span>
+          <>
+            <LoaderCircle className="h-4 w-4 animate-spin" />
+            Criando conta...
+          </>
         ) : (
-          <span>Criar Conta</span>
+          "Criar Conta"
         )}
       </button>
     </form>

@@ -39,18 +39,18 @@ export default function CreatePostPage() {
     <div className="bg-background min-h-screen">
       <Nav_Bar />
 
-      <main className="mx-auto max-w-3xl px-6 py-10">
+      <main className="mx-auto max-w-3xl px-4 py-6 sm:px-6 sm:py-10">
         {/* TOPO */}
-        <div className="mb-8 flex items-center gap-4">
+        <div className="mb-6 flex items-start gap-3 sm:mb-8 sm:items-center sm:gap-4">
           <Link
             to="/"
-            className="text-text-secundary hover:text-text-primary transition"
+            className="text-text-secundary hover:text-text-primary mt-1 transition sm:mt-0"
           >
             <ArrowLeft />
           </Link>
 
           <div>
-            <h1 className="text-text-primary text-2xl font-semibold">
+            <h1 className="text-text-primary text-xl font-semibold sm:text-2xl">
               Criar nova publicação
             </h1>
             <p className="text-text-secundary text-sm">
@@ -62,7 +62,7 @@ export default function CreatePostPage() {
         {/* CARD */}
         <form
           onSubmit={handleSubmit}
-          className="bg-background-2 space-y-6 rounded-md border border-gray-200 p-6 shadow-sm"
+          className="bg-background-2 space-y-5 rounded-xl border border-gray-200 p-4 shadow-sm sm:space-y-6 sm:p-6"
         >
           {/* TÍTULO */}
           <div>
@@ -90,17 +90,17 @@ export default function CreatePostPage() {
               value={formData.conteudo}
               onChange={handleChange}
               placeholder="Escreva o conteúdo do post..."
-              className="bg-background focus:ring-primary min-h-[250px] w-full rounded-md border border-gray-300 p-4 text-sm leading-relaxed focus:ring-2 focus:outline-none"
+              className="bg-background focus:ring-primary min-h-[200px] w-full rounded-md border border-gray-300 p-4 text-sm leading-relaxed focus:ring-2 focus:outline-none sm:min-h-[250px] md:min-h-[300px]"
               required
             />
           </div>
 
           {/* FOOTER */}
-          <div className="flex items-center justify-end gap-3 border-t border-gray-100 pt-4">
+          <div className="flex flex-col items-stretch justify-end gap-3 border-t border-gray-100 pt-4 sm:flex-row sm:items-center">
             <button
               type="button"
               onClick={() => navigate("/dashboard")}
-              className="rounded-md px-5 py-2.5 text-base font-medium text-gray-700 transition-all duration-200 hover:bg-gray-100"
+              className="w-full rounded-md px-5 py-2.5 text-sm font-medium text-gray-700 transition-all duration-200 hover:bg-gray-100 sm:w-auto sm:text-base"
             >
               Cancelar
             </button>
@@ -108,7 +108,7 @@ export default function CreatePostPage() {
             <button
               type="submit"
               disabled={loading}
-              className="from-primary to-accent flex items-center gap-2 rounded-md bg-linear-to-r px-6 py-2.5 text-base text-white shadow-md transition-all duration-200 hover:opacity-90 hover:shadow-lg"
+              className="from-primary to-accent flex w-full items-center justify-center gap-2 rounded-md bg-linear-to-r px-6 py-2.5 text-sm text-white shadow-md transition-all duration-200 hover:opacity-90 hover:shadow-lg disabled:opacity-70 sm:w-auto sm:text-base"
             >
               <Send size={16} />
               {loading ? "Publicando..." : "Publicar"}

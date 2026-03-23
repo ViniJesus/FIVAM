@@ -74,12 +74,12 @@ export default function PostDetail() {
     <div className="bg-background min-h-screen">
       <Nav_Bar />
 
-      <div className="mx-auto max-w-[1200px] px-6 py-12">
+      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
         {/* BOTÃO VOLTAR */}
         <div className="mb-6">
           <button
             onClick={() => navigate(-1)}
-            className="hover:bg-hover bg-primary flex items-center gap-2 rounded-md px-3 py-2.5 text-white transition-all"
+            className="hover:bg-hover bg-primary flex w-full items-center justify-center gap-2 rounded-md px-4 py-2.5 text-sm text-white transition-all sm:w-auto"
           >
             <ArrowLeft size={18} />
             Voltar
@@ -87,9 +87,9 @@ export default function PostDetail() {
         </div>
 
         {/* CARD */}
-        <div className="bg-background-2 rounded-md border border-gray-200 p-8 shadow-sm">
+        <div className="bg-background-2 rounded-xl border border-gray-200 p-5 shadow-sm sm:p-8">
           {/* TÍTULO */}
-          <h1 className="text-text-primary text-3xl leading-tight font-bold">
+          <h1 className="text-text-primary text-2xl leading-tight font-bold sm:text-3xl md:text-4xl">
             {post.titulo}
           </h1>
 
@@ -106,7 +106,7 @@ export default function PostDetail() {
           <div className="my-6 h-px w-full bg-gray-200" />
 
           {/* CONTEÚDO */}
-          <p className="text-text-secundary text-base leading-relaxed whitespace-pre-line">
+          <p className="text-text-secundary text-sm leading-relaxed whitespace-pre-line sm:text-base sm:leading-loose">
             {post.conteudo}
           </p>
         </div>
