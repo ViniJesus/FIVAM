@@ -75,11 +75,11 @@ export default function PostsList() {
   });
 
   return (
-    <div>
+    <div className="bg-background min-h-screen">
       <Nav_Bar />
 
-      <div className="bg-background min-h-screen px-4 py-6 sm:px-6 sm:py-10">
-        <div className="mx-auto max-w-[1200px]">
+      <div className="px-4 py-6 sm:px-6 sm:py-10">
+        <div className="mx-auto max-w-300">
           {/* HEADER */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -92,7 +92,7 @@ export default function PostsList() {
             </div>
 
             {/* INPUT DE BUSCA */}
-            <div className="relative w-full sm:w-[400px]">
+            <div className="relative w-full sm:w-100">
               <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-gray-400" />
 
               <input
