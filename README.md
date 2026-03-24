@@ -259,16 +259,6 @@ Eliminamos divergências entre ambientes de desenvolvimento e produção, assegu
 Isolamento:
 A containerização permite a execução isolada da aplicação, facilitando o onboarding de novos desenvolvedores e a integração com pipelines de integração contínua (CI).
 
-- ### Abordagem “Security-First”
-
-A segurança foi tratada como um pilar fundamental desde o início do desenvolvimento, sendo incorporada em todas as etapas do projeto.
-
-Análise de Vulnerabilidades:
-Utilização de ferramentas para identificação e mitigação de vulnerabilidades em tempo de desenvolvimento.
-
-Validação de Entradas:
-Implementação de validações rigorosas nos dados de entrada, prevenindo ataques comuns como Injection e Cross-Site Scripting (XSS).
-
 - ### Deploy Contínuo com Render
 
 Implementamos um processo de deploy contínuo (Continuous Deployment - CD) utilizando a plataforma Render.
