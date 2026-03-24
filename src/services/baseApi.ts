@@ -26,15 +26,23 @@ async function request<T>(
     body: body ? JSON.stringify(body) : undefined,
   });
 
-  // ❌ erro da API
+  // 🔥 TRATAMENTO DE AUTH
+  if (response.status === 401) {
+    localStorage.clear();
+
+    // redireciona pro login
+    window.location.href = "/login";
+
+    throw new Error("Não autorizado");
+  }
+
   if (!response.ok) {
     const error = await response.json().catch(() => null);
     throw new Error(error?.error || "Erro na requisição");
   }
 
-  // ✅ CORREÇÃO AQUI
   if (response.status === 204) {
-    return {} as T; // ou null se preferir
+    return {} as T;
   }
 
   return response.json();
